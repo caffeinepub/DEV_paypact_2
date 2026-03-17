@@ -1,0 +1,61 @@
+type UserSummary = 
+ record {
+   bills: vec record {
+                amount: int;
+                name: text;
+                payer: User;
+              };
+   debts: vec Debt;
+   participant: User;
+   spent: int;
+   total: int;
+ };
+type User = 
+ record {
+   id: principal;
+   username: text;
+ };
+type Pact = 
+ record {
+   createdAt: int;
+   createdBy: principal;
+   currency: text;
+   isActive: bool;
+   name: text;
+ };
+type ImageData = 
+ record {
+   contentType: text;
+   data: blob;
+ };
+type Debt = 
+ record {
+   amount: int;
+   creditor: User;
+   debtor: User;
+ };
+type Bill = 
+ record {
+   amount: nat;
+   createdAt: int;
+   createdBy: principal;
+   id: nat;
+   isImage: bool;
+   name: text;
+   participants: vec principal;
+ };
+service : {
+  addBill: (name: text, amount: nat, participants: vec principal, image:
+   opt ImageData) -> (Bill);
+  addUser: (id: principal, username: text) -> (User);
+  addUserSelf: (username: text) -> ();
+  getAllBills: () -> (vec Bill);
+  getAllUsers: () -> (vec User);
+  getBillById: (id: nat) -> (Bill);
+  getImageByBillId: (id: nat) -> (ImageData);
+  getPact: () -> (Pact);
+  initPact: (name: text, currency: text, username: text) -> ();
+  removeBillById: (id: nat) -> ();
+  settle: () -> (Pact);
+  summary: () -> (vec UserSummary);
+}

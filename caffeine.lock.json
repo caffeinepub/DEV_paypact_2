@@ -1,0 +1,11 @@
+{
+  "templates": {
+    "declaration_generator": "blob-10",
+    "build_template": "1.0.0"
+  },
+  "components": {
+    "build-template-react": "1.0.0"
+  },
+  "aiCoreVersion": "0.16.0",
+  "coreLibVersion": "implicits-20"
+}
